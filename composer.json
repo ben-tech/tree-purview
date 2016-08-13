@@ -1,26 +1,22 @@
 {
     "name": "ben-tech/tree-purview",
-    "description": "Extension for Yii2 Framework to work with jQuery TreeGrid.You can edit the pwoer by yourself",
-    "keywords": ["yii2", "tree", "treeview", "treegrid", "power","purview","permission","rights"],
+    "description": "Extension for Yii2 Framework to work with jQuery TreeGrid",
+    "keywords": ["yii2", "tree", "treeview", "treegrid", "interface"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
-    "support": {
-        "issues": "https://github.com/ben-tech/tree-purview/issues",
-        "source": "https://github.com/ben-tech/tree-purview"
-    },
     "minimum-stability": "stable",
     "authors": [
         {
             "name": "ben yang",
-            "email": "kolvin@qq.com"
+            "email": "kolin@qq.com"
         }
     ],
     "require": {
-        "php": ">=5.2",
-        "yiisoft/yii2": "2.0.*"
+        "yiisoft/yii2": "2.0.*",
+        "bower-asset/jquery-treegrid": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "*"
     },
     "autoload": {
         "psr-4": { "bmte\\treepurview\\": "" }

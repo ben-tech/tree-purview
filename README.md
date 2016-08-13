@@ -1,59 +1,113 @@
-# jQuery Tree purview Extension for Yii 2
+# jQuery TreeGrid Extension for Yii 2
 
 This is the [jQuery TreeGrid](https://github.com/maxazan/jquery-treegrid) extension for Yii 2. It encapsulates TreeGrid component in terms of Yii widgets,
 and thus makes using TreeGrid component in Yii applications extremely easy
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
-[![Latest Stable Version](https://poser.pugx.org/leandrogehlen/yii2-treegrid/v/stable.png)](https://packagist.org/packages/leandrogehlen/yii2-treegrid)
-[![Total Downloads](https://poser.pugx.org/leandrogehlen/yii2-treegrid/downloads.png)](https://packagist.org/packages/leandrogehlen/yii2-treegrid)
 
 
-Installation
-------------
+## Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
-if composer not work please upload ,you can run : 
-
-```
-composer global require "fxp/composer-asset-plugin:~1.1.1"
-```
-
-if also not run please use command:
-```
-composer clearcache
-
-composer selfupdate
-
-composer update
-```
 
 Either run
 
 ```
-composer require --prefer-dist ben-tech/yii2-dual-list-box "dev-master"
+php composer.phar require --prefer-dist ben-tech/tree-purview "*"
 ```
 
 or add
 
 ```
-"ben-tech/tree-purview": "dev-master"
+"ben-tech/tree-purview": "*"
 ```
 
 to the require section of your `composer.json` file.
 
+## How to use
 
-Usage
------
+**Model**
 
-Once the extension is installed, simply use it in your code:
+```php
 
-## EXAMPLE ##
+use yii\db\ActiveRecord;
 
-### View ###
+/**
+ * @property string $description
+ * @property integer $parent_id
+ */
+class Tree extends ActiveRecord 
+{
 
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'tree';
+    }  
+    
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['description'], 'required'],
+            [['description'], 'string'],
+            [['parent_id'], 'integer']
+        ];
+    }
+}
+```
 
+**Controller**
 
+```php
+use yii\web\Controller;
+use Yii;
+use yii\data\ActiveDataProvider;
 
-### Controller VIEW ###
+class TreeController extends Controller
+{
+
+    /**
+     * Lists all Tree models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $query = Tree::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+```
+
+**View**
+
+```php
+use leandrogehlen\treegrid\TreeGrid;
+  
+<?= TreeGrid::widget([
+        'dataProvider' => $dataProvider,
+        'keyColumnName' => 'id',
+        'parentColumnName' => 'parent_id',
+        'parentRootValue' => '0', //first parentId value
+        'pluginOptions' => [
+            'initialState' => 'collapsed',
+        ],
+        'columns' => [
+            'name',
+            'id',
+            'parent_id',
+            ['class' => 'yii\grid\ActionColumn']
+        ]     
+      ]); ?>
+```
 
 
