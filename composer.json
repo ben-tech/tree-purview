@@ -23,6 +23,6 @@
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
-        "psr-4": { "leandrogehlen\\treegrid\\": "" }
+        "psr-4": { "bmte\\treepurview\\": "" }
     }
 }
